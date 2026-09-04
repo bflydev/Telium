@@ -19,6 +19,7 @@ queen = 0 #Location of the queen alien
 vent_shafts = [] #Location of the ventilation shaft entrances
 info_panels = [] #Location of the information panels
 workers = [] #Location of the worker aliens
+current_map = "init"
 
 #Procedure declarations
 
@@ -31,7 +32,7 @@ def load_module():
 # we are now reading the text file and adding the data to moves to see where we can move.
 def get_modules_from(module):
     moves = []
-    text_file = open("Charles_Darwin\\module" + str(module) + ".txt", "r")
+    text_file = open(str(current_map) + "\\module" + str(module) + ".txt", "r")
     for counter in range(0,4):
         move_read = text_file.readline()
         move_read = int(move_read.strip())
@@ -79,14 +80,17 @@ def get_action():
                 print("The module must be connected to the current module.")
 
 def loadMap():
-    global num_modules
+    global num_modules, current_map
     map_choice=input("What map do you want to play? (Charles Darwin / Rainbow Omelette): ")
     if map_choice == "Charles Darwin":
         num_modules = 17
+        current_map = "Charles_Darwin"
     elif map_choice == "Rainbow Omelette":
         num_modules = 11
+        current_map = "Rainbow_Omelette"
     else:
         print("That wasn't a valid map choice, defaulting to Charles Darwin.")
+        current_map = "Charles_Darwin"
         num_modules = 17
 
 def printInstructions():
