@@ -78,6 +78,15 @@ def get_action():
                 power = power - 1
             else:
                 print("The module must be connected to the current module.")
+def printInstructions():
+    print("""
+    === TELIUM: GAME INSTRUCTIONS ===
+    - OBJECTIVE: Find and trap the Queen Alien (Telium) in a module with no exits, then destroy her[cite: 1].
+    - MOVES: Type 'MOVE' then enter the module number to navigate adjacent rooms.
+    - SCANNER: Type 'SCANNER' then 'LOCK' to lock doors in a room. The Queen cannot enter a locked module.
+    - POWER: Moving and using the scanner consumes station power. If power hits 0, you die.
+    - HAZARDS: Watch out for worker aliens and ventilation shafts!
+    """)
 
 #Main program starts here
 def startGame():
@@ -109,17 +118,9 @@ def homeMenu():
         elif decision == "story":
             play_video()
         elif decision == "instructions":
-            print("""
-    === TELIUM: GAME INSTRUCTIONS ===
-    - OBJECTIVE: Find and trap the Queen Alien (Telium) in a module with no exits, then destroy her[cite: 1].
-    - MOVES: Type 'MOVE' then enter the module number to navigate adjacent rooms.
-    - SCANNER: Type 'SCANNER' then 'LOCK' to lock doors in a room. The Queen cannot enter a locked module.
-    - POWER: Moving and using the scanner consumes station power. If power hits 0, you die.
-    - HAZARDS: Watch out for worker aliens and ventilation shafts!
-    """)
+            printInstructions()
         elif decision == "quit":
             sys.exit()
         else:
             print("Uh... I think you did something wrong :(")
 
-homeMenu()
