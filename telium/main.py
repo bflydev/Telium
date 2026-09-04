@@ -6,7 +6,6 @@ import sys
 from telium.super_secret.super_secret import play_video
 
 #Global variables
-
 num_modules = 17 #The number of modules in the space station
 module = 1 #The module of the space station we are in
 last_module = 0 #The last module we were in
@@ -78,6 +77,18 @@ def get_action():
                 power = power - 1
             else:
                 print("The module must be connected to the current module.")
+
+def loadMap():
+    global num_modules
+    map_choice=input("What map do you want to play? (Charles Darwin / Rainbow Omelette): ")
+    if map_choice == "Charles Darwin":
+        num_modules = 17
+    elif map_choice == "Rainbow Omelette":
+        num_modules = 11
+    else:
+        print("That wasn't a valid map choice, defaulting to Charles Darwin.")
+        num_modules = 17
+
 def printInstructions():
     print("""
     === TELIUM: GAME INSTRUCTIONS ===
@@ -90,6 +101,7 @@ def printInstructions():
 
 #Main program starts here
 def startGame():
+    loadMap()
     global alive, won
     while alive and not won:
         load_module()
