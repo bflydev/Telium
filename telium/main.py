@@ -1,6 +1,9 @@
 #Telium – The game
 
 import random
+import sys
+
+from telium.super_secret.super_secret import play_video
 
 #Global variables
 
@@ -29,7 +32,7 @@ def load_module():
 # we are now reading the text file and adding the data to moves to see where we can move.
 def get_modules_from(module):
     moves = []
-    text_file = open("Charles_Darwin\module" + str(module) + ".txt", "r")
+    text_file = open("Charles_Darwin\\module" + str(module) + ".txt", "r")
     for counter in range(0,4):
         move_read = text_file.readline()
         move_read = int(move_read.strip())
@@ -77,19 +80,41 @@ def get_action():
                 print("The module must be connected to the current module.")
 
 #Main program starts here
+def startGame():
+    while alive and not won:
+        load_module()
+        if won == False and alive == True:
+            output_moves()
+            # adding the thing that if you lose all power, you lose and it outputs stuff.
+            if power <= 0:
+                alive = False
+                print("The station has run completely out of power.")
+        get_action()
+        if won == True:
+            print("The queen is trapped and you burn it to death with your flamethrower.")
+        print("Game over. You win!")
+        if alive == False:
+            print("The station has run out of power. Unable to sustain life support, you die.")
 
-while alive and not won:
-    load_module()
-    if won == False and alive == True:
-        output_moves()
-        # adding the thing that if you lose all power, you lose and it outputs stuff.
-        if power <= 0:
-            alive = False
-            print("The station has run completely out of power.")
-    get_action()
-    if won == True:
-        print("The queen is trapped and you burn it to death with your flamethrower.")
-    print("Game over. You win!")
-    if alive == False:
-        print("The station has run out of power. Unable to sustain life support, you die.")
-
+# Title Screen
+def homeMenu():
+    print("WELCOME TO TELIUM")
+    print("What would you like to do:")
+    decision = input("choose: 'play', 'story', 'instructions' or 'quit': ")
+    if decision == "play":
+        startGame()
+    elif decision == "story":
+        play_video()
+    elif decision == "instructions":
+        print("""
+=== TELIUM: GAME INSTRUCTIONS ===
+- OBJECTIVE: Find and trap the Queen Alien (Telium) in a module with no exits, then destroy her[cite: 1].
+- MOVES: Type 'MOVE' then enter the module number to navigate adjacent rooms.
+- SCANNER: Type 'SCANNER' then 'LOCK' to lock doors in a room. The Queen cannot enter a locked module.
+- POWER: Moving and using the scanner consumes station power. If power hits 0, you die.
+- HAZARDS: Watch out for worker aliens and ventilation shafts!
+""")
+    elif decision == "quit":
+        sys.exit()
+    else:
+        print("Uh... I think you did something wrong :(")
