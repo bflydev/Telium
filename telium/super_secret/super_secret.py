@@ -7,7 +7,8 @@ VIDEO_PATH = os.path.join(MODULE_DIR, "super_secret.mp4")
 def play_video():
     video = cv2.VideoCapture(VIDEO_PATH)
 
-    delay = int(1000 / 25.44)
+    fps = video.get(cv2.CAP_PROP_FPS)
+    delay = int(1000 / fps) if fps > 0 else 40
     cv2.namedWindow("Video", cv2.WINDOW_NORMAL)
     cv2.resizeWindow("Video", 1920, 1080)
 
