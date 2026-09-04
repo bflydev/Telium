@@ -64,7 +64,8 @@ def get_action():
     while valid_action == False:
         print("What do you want to do next ? (MOVE, SCANNER)")
         action = input(">")
-        if action == "MOVE":
+        # jank way of improving input sanitisation
+        if action == "MOVE" or action == "M" or action == "move" or action == "m":
             move = int(input("Enter the module to move to: "))
             if move in possible_moves:
                 valid_action = True
