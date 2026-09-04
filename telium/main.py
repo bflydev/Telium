@@ -11,8 +11,7 @@ possible_moves = [] #List of the possible moves we can make
 alive = True #Whether the player is alive or dead
 won = False #Whether the player has won
 power = 100 #The amount of power the space station has
-fuel = 500 #The amount of fuel the player has in the
-# flamethrower - this isn't meant to be in a comment, but wtf is craig and dave doing
+fuel = 500 #The amount of fuel the player has in the flamethrower
 locked = 0 #The module that has been locked by the player
 queen = 0 #Location of the queen alien
 vent_shafts = [] #Location of the ventilation shaft entrances
