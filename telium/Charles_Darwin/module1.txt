@@ -2,3 +2,4 @@
 3
 0
 0
+The main communication module. Nothing seems to be working, however...
