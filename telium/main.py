@@ -20,13 +20,14 @@ vent_shafts = [] #Location of the ventilation shaft entrances
 info_panels = [] #Location of the information panels
 workers = [] #Location of the worker aliens
 current_map = "init"
+module_info = "init"
 
 #Procedure declarations
 
 # this loads the modules. enough said.
 def load_module():
-    global module, possible_moves
-    possible_moves = get_modules_from(module)
+    global module, possible_moves, module_info
+    possible_moves, module_info = get_modules_from(module)
     output_module()
 
 # we are now reading the text file and adding the data to moves to see where we can move.
@@ -38,16 +39,20 @@ def get_modules_from(module):
         move_read = int(move_read.strip())
         if move_read != 0:
             moves.append(move_read)
+
+    module_info = text_file.readline().strip()
+
     text_file.close()
-    return moves
+    return moves, module_info
 
 # tells ya what module your in
 def output_module():
-        global module
+        global module, module_info
         print()
         print("-----------------------------------------------------------------")
         print()
         print("You are in module",module)
+        print(module_info)
         print()
 
 # tells you what moves you can make, with messy base code. again, ugh.
