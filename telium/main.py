@@ -98,6 +98,10 @@ def loadMap():
         current_map = "Charles_Darwin"
         num_modules = 17
 
+def rollCredits():
+    print("The Great and Powerful bflydev - main programmer")
+    print("catgirlshadow (discord) - video wizard consultant")
+
 def printInstructions():
     print("""
     === TELIUM: GAME INSTRUCTIONS ===
@@ -133,7 +137,7 @@ def homeMenu():
     while 1 < 2:
         print("WELCOME TO TELIUM")
         print("What would you like to do:")
-        decision = input("choose: 'play', 'story', 'instructions' or 'quit': ")
+        decision = input("choose: 'play', 'story', 'instructions', 'credits' or 'quit': ")
         if decision == "play":
             startGame()
         elif decision == "story":
@@ -142,6 +146,7 @@ def homeMenu():
             printInstructions()
         elif decision == "quit":
             sys.exit()
+        elif decision == "credits":
+            rollCredits()
         else:
             print("Uh... I think you did something wrong :(")
-
