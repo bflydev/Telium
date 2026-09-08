@@ -22,6 +22,7 @@ workers = [] #Location of the worker aliens
 current_map = "init"
 module_info = "init"
 targetLoc = "init"
+greedy_info_panels = "init"
 
 #Procedure declarations
 
@@ -106,6 +107,26 @@ def loadMap():
         current_map = "Charles_Darwin"
         num_modules = 17
 
+def spawn_npcs():
+    global num_modules, queen, vent_shafts, greedy_info_panels, workers
+    module_set = []
+    for counter in range(2, num_modules):
+        module_set.append(counter)
+    random.shuffle(module_set)
+    i = 0
+    queen = module_set[i]
+    for counter in range(0, 3):
+        i = i + 1
+        vent_shafts.append(module_set[i])
+
+    for counter in range(0, 2):
+        i = i + 1
+        info_panels.append(module_set[i])
+
+    for counter in range(0, 3):
+        i = i + 1
+        workers.append(module_set[i])
+
 def rollCredits():
     print("The Great and Powerful bflydev - main programmer")
     print("catgirlshadow (discord) - video wizard consultant")
@@ -123,6 +144,11 @@ def printInstructions():
 #Main program starts here
 def startGame():
     loadMap()
+    spawn_npcs()
+    print("Queen alien is located in module:", queen)
+    print("Ventilation shafts are located in modules:", vent_shafts)
+    print("Information panels are located in modules:", info_panels)
+    print("Worker aliens are located in modules:", workers)
     global alive, won
     while alive and not won:
         load_module()
