@@ -21,6 +21,7 @@ info_panels = [] #Location of the information panels
 workers = [] #Location of the worker aliens
 current_map = "init"
 module_info = "init"
+targetLoc = "init"
 
 #Procedure declarations
 
@@ -67,22 +68,29 @@ def output_moves():
 # this gets the actions you can do and allows you to do that action.
 def get_action():
     # added power to global variables. woo-hoo.
-    global module, last_module, possible_moves, power
+    global module, last_module, possible_moves, power, targetLoc
     valid_action = False
     while valid_action == False:
         print("What do you want to do next ? (MOVE, SCANNER)")
-        action = input(">")
-        # jank way of improving input sanitisation
-        if action == "MOVE" or action == "M" or action == "move" or action == "m":
-            move = int(input("Enter the module to move to: "))
-            if move in possible_moves:
-                valid_action = True
-                last_module = module
-                module = move
-                # decrementing power by 1 after each move
-                power = power - 1
-            else:
-                print("The module must be connected to the current module.")
+        action = input(">").strip()
+        # jank way of improving input sanitisation and adding stuff
+        if action.upper().startswith("MOVE") and len(action) > 4:
+            targetLoc = action[4:].strip()
+        elif action.upper().startswith("M") and not action.upper().startswith("MOVE") and len(action) > 1:
+            targetLoc = action[1:].strip()
+        elif action.upper() == "MOVE" or action.upper() == "M":
+            targetLoc = input("Enter the module to move to: ").strip()
+        if targetLoc != "":
+            if targetLoc.isdigit():
+                move = int(targetLoc)
+                if move in possible_moves:
+                    valid_action = True
+                    last_module = module
+                    module = move
+                    # decrementing power by 1 after each move
+                    power = power - 1
+                else:
+                    print("The module must be connected to the current module.")
 
 def loadMap():
     global num_modules, current_map
